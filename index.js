@@ -351,6 +351,7 @@ function setPositionDeclension(positionName) {
     secondWord = arrForPositionName?.[1];
     wordEnding = arrForPositionName.slice(2);
 
+    //змінити закінчення першого слова
     firstWord = firstWord
       .replace(/(ой|ий)$/, "ого") // закінчення на "ой", "ий"
       .replace(/ій$/, "ього") // закінчення на "ій"
