@@ -351,17 +351,21 @@ function setPositionDeclension(positionName) {
     secondWord = arrForPositionName?.[1];
     wordEnding = arrForPositionName.slice(2);
 
-    //змінити закінчення першого слова
-    firstWord = firstWord
-      .replace(/(ой|ий)$/, "ого") // закінчення на "ой", "ий"
-      .replace(/ій$/, "ього") // закінчення на "ій"
-      .replace(/ов$/, "ова") // закінчення на "ов"
-      .replace(/єв$/, "єва") // закінчення на "єв"
-      .replace(/ів$/, "іва") // закінчення на "ів"
-      .replace(/їв$/, "їва") // закінчення на "їв"
-      .replace(/ин$/, "ина") // закінчення на "ин"
-      .replace(/ін$/, "іна") // закінчення на "ін"
-      .replace(/їн$/, "їна"); // закінчення на "їн"
+    //перше слово прикметник, відмінюються два слова (перше і друге)
+    if (firstWord.search(/(ий)$/) != -1) {
+      firstWord = firstWord.replace(/(ий)$/, "ого");
+      secondWord = secondWord.replace(
+        /([бвгґджзклмнпрстфхцчшщ])$/,
+        secondWord.slice(-1) + "а"
+      );
+    }
+    //перше слово закінчення на приголосну
+    if (firstWord.search(/([бвгґджзклмнпрстфхцчшщ])$/) != -1) {
+      firstWord = firstWord.replace(
+        /([бвгґджзклмнпрстфхцчшщ])$/,
+        firstWord.slice(-1) + "а"
+      );
+    }
 
     positionName = `${firstWord} ${secondWord} ${wordEnding.join(" ")}`;
   }
